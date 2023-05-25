@@ -1,0 +1,15 @@
+To list CPU information on this machine:
+
+  cat /proc/cpuinfo
+
+To compile pthread programs, you need to explicitly link in the
+pthreads library:
+
+  gcc -g -Wall -o prog prog.c -lpthread
+
+Implement your solution to producer consumer in prodcons.c
+
+
+     run top -H to see the threads running
+
+

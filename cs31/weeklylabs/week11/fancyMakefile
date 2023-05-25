@@ -1,0 +1,65 @@
+# a makefile that builds an executable from multiple .c files
+# it first builds .o files, then the a.out
+#
+# this makefile also uses more variables and more advanced make syntax
+# it is a much more generic makefile that can be tailored to compile
+# any executable, just by changing a few makefile variable definitions
+# (newhall, 2012)
+
+#######################################################
+# these are the definitions that may need to be changed
+# to build a particular executable (parts (4) and (5) always
+# and occasionally some of the others too):
+
+# (0) define compiler
+CC = gcc
+
+# (1) define compliler flags:
+CFLAGS = -g -Wall
+
+# (2) define any special header file directory paths
+# -Ipath to any include directory paths needed to build, ex:
+#  INCLUDES = -I../headers  -I/home/me/include
+INCLUDES =
+
+# (3) define any libraries that need to be explicitly linked in
+# -Lpath to any directories containing library code neede to link in
+#  LIBDIR =  -L../libs -L/home/me/lib
+LIBDIR =
+
+# list any libraries that need to be explictly linked in
+# LIBS = $(LIBDIR) -lmine -lm -lsocket
+LIBS = $(LIBDIR)
+
+# (4) define the target (a.out name)
+TARGET = myprog
+
+# (5) list all the source files from which to build .o and target
+SRC = prog.c mylib.c
+
+##########################################################
+# the following part is generic for building a single executable
+# file from multiple object files, just change the definitions
+# above for particular files, and flags, and the rest of this
+# works for any definitions above
+
+# uses suffix replacement macro to define OBJS from SRC
+#  $(name:str1:str2) : for each word in name repalce str1 with str2
+OBJS =  $(SRC:.c=.o)
+
+# this makes sure the that all target is the default one
+.PHONY: clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(TARGET) $(OBJS) $(LIBS)
+
+# suffix replacement rule for building .o's from .c files
+#   automatic variable $< is the name of a prereq .c file
+#   automatic variable $@ is the name of a target .o file
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	$(RM) *.o $(TARGET)

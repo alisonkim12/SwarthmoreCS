@@ -1,0 +1,29 @@
+To list CPU information on this machine:
+
+  cat /proc/cpuinfo
+  or lscpu
+
+
+To see running threads:
+
+  ps -eLf
+
+To compile pthread programs, you need to explicitly link in the
+pthreads library:
+
+  gcc -g -Wall -o prog prog.c -lpthread
+
+(the Makefile has a rule to do this for compiling hello)
+----------------------------------------
+
+We are going to look at hello.c pthread
+
+  (1) try running it a few times with different numbers of threads
+
+  (2) what is happening?
+
+  (3) let's fix the race condition
+
+  (4) let's time the code before and after fixing the race condition
+
+      time ./hello  100

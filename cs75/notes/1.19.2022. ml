@@ -1,0 +1,95 @@
+(*Lecture notes for W1, 1/19*)
+
+
+let n : float = 1.0;;
+
+let c : char = 'c';;
+
+let s: string = "str";;
+
+let ns: string = string_of_float n;;
+
+let smallList: int list = 
+  1 :: (2 :: (3 :: [])) (* this is right associative *)
+;; 
+
+let lessGrossList : int list = 
+  [1;2;3]
+;; 
+
+let slightlyLargertList : int list = 
+  0 :: lessGrossList 
+;;
+
+(*Tuples*)
+
+let coordinate : int * int = (5,8);
+  let otherTuple : bool * bool = (true, false);;
+
+let (first, second) = coordiate;; 
+
+print_endline (string_of_int first);;
+
+(* Variants *)
+
+type fruit = 
+  | Apple of int
+  | Orange of int 
+;;
+
+let fruit1 : fruit = Apple(6);;
+
+let fruit2 : fruit = Orange(4);;
+
+let how_many (f: fruit) : int = 
+  match f with 
+  | Apple(x) -> x
+  | Orange(x) -> x
+
+;;
+
+(*Assume: keys are ints, values are strings*)
+
+type bst = 
+  | Node of int * string * bst * bst 
+  | EmptyTree 
+;; 
+
+let exampleTree : bst = 
+  Node (4, "4", 
+        Node (2, "2", 
+              EmptyTree,
+              Node (3, "3", EmptyTree, EmptyTree)
+             ),
+        Node (6, "6", 
+              Node(5, "5", EmptyTree, EmptyTree),
+              EmptyTree
+             )
+       );;
+
+let get (tree: bst) (key : int) : string = 
+  match tree with 
+  | EmptyTree -> 
+  | Node(node key, node value, left, right) -> 
+    if key = node key then 
+      node value 
+    else 
+    if key < node key then 
+      get left key 
+    else 
+      get right key 
+;;
+
+let rec insert (tree : bst) (key : int) (value :string) : 
+  match tree with 
+  | Emptytree -> (key, value, EmptyTree, EmptyTree)
+  | Node (node_key, node_value, left, right) -> 
+    if key = node_key then 
+      failwith "key already present"
+    else if key < node_key then 
+      let new_left = insert left key value in  
+      Node(node_key, node_value, new_left, right)
+    else 
+      insert right key value
+;; 
+

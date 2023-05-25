@@ -1,0 +1,49 @@
+In this directory:
+
+   firstprog.c : an example C program with variable declaration, C 
+                constants, and example calls to printf function.
+                There are a lot of comments in this file explaining
+                parts of the program
+
+   functions.c: an example program with a function (includes function
+                prototype, function call, fuction definition)
+                NOTE: the complete function comment with its definition
+                There are some TODO comments for some things you can
+                try adding to this program and test out.
+
+========================================
+To compile a C program to an executable:
+
+ gcc firstprog.c
+
+If the program can successfully be compiled, gcc creates an executable 
+file named a.out that you can run from the shell prompt:
+
+ ./a.out
+
+There are command line options to gcc, we will almost always use these two:
+
+  -o filename    # put executable in a file named filename instead of a.out
+  -g             # add debugging information to the executable file
+
+Using these command line options:
+
+  gcc -g -o firstprog firstprog.c
+
+  ./firstprog
+
+We are also going to use make to build programs.
+make is a utility that uses commands from a Makefile
+to build a program executable.  With a makefile, you can
+just type make to compile both programs:
+
+  make
+
+Then run each:
+
+  ./firstprog
+  ./functions
+
+To get rid of files created by compilation:
+
+  make clean

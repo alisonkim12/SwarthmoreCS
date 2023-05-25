@@ -1,0 +1,11 @@
+compile:
+-------
+* make: builds prog executable from prog.c C code and 
+        dosomething.s IA32 assembly code
+
+* make soln: compiles dosomething.c into IA32 assembly dosomethingAnswer.s
+             for one "answer" to the IA32 code writing part  
+
+* make clean: clean-up all compiled files
+
+
